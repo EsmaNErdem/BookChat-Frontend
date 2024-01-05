@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500&display=swap');
+
+*{
+  font-family: 'Alegreya Sans SC', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 100px;
+  background-color: rgba(85, 107, 47, 0.173)
+}
+
+code {
+  font-family: 'Alegreya Sans SC', sans-serif;
+}

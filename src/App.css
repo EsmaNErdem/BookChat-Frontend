@@ -1,0 +1,12 @@
+
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500&display=swap');
+
+.App {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  min-height: 100vh;
+  font-family: 'Alegreya Sans SC', sans-serif;
+}
+

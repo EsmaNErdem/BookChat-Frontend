@@ -1,0 +1,62 @@
+/* ReviewDisplay.css */
+.ReviewDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.UserInfo {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+}
+
+.UsernameLink {
+  text-decoration: none;
+  color: #6d17b7;
+  display: flex;
+  align-items: center;
+}
+
+.UsernameLink:hover {
+  text-decoration: underline;
+}
+
+.Avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+.ReviewInfo {
+  width: 80%;
+  margin: 20px 0px;
+}
+
+.BookInfo {
+  width: 80%;
+  display: flex;
+  align-items: stretch;
+  justify-content:space-evenly;
+  margin: 10px 0px;
+}
+
+.TitleLink {
+  text-decoration: none;
+  color: #a074f3;
+}
+
+.TitleLink:hover {
+  text-decoration: underline;
+}
+
+.CardImage {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 30px;
+}
