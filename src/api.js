@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = `http${process.env.REACT_APP_BASE_URL}` || "http://localhost:3001";
 
 /** API Class.
  *
@@ -134,6 +134,22 @@ class BookClubApi {
     static async unfollowUser(following, unfollowedBy) {
         const res = await this.request(`users/${following}/follow/${unfollowedBy}`, {}, "delete")
         return res.unfollow;
+    }
+
+    /**
+     * Get previous messages for a given chat room
+     */
+    static async getRoomPreviousMessages(roomName) {
+        const res = await this.request(`chats/${roomName}`, {})
+        return res.messages;
+    }
+
+    /**
+     * Get previous chat rooms with last chat text for current user
+     */
+    static async getUserPreviousMessages(currentUser) {
+        const res = await this.request(`chats/rooms/${currentUser}`, {})
+        return res.messages;
     }
 
     /**
