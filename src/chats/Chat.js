@@ -4,9 +4,10 @@ import { ListItem, TextField, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Messages from "./Messages";
 import Alert from "../utilities/Alert";
-import "./Chat.css"
+import "./Chat.css";
 
-const BASE_URL = `wss${process.env.REACT_APP_BASE_URL}` || "ws://localhost:3001";
+const url = process.env.REACT_APP_BASE_URL ? process.env.REACT_APP_BASE_URL.split('').splice(4).join('') : null
+const BASE_URL = process.env.REACT_APP_BASE_URL ? `ws${url}` : "ws://localhost:3001";
 
 /**
  * Chat Component
@@ -71,7 +72,7 @@ const Chat = ({ isOpen, receiver, prevMessages=[], setWebsocket }) => {
             return () => {
                 console.log("closing WebSocket");
                 setMessages([]);
-                wsRef.current && wsRef.current.close();
+                if(wsRef.current) wsRef.current.close();
                 wsRef.current = null
             };
         }
@@ -93,14 +94,14 @@ const Chat = ({ isOpen, receiver, prevMessages=[], setWebsocket }) => {
             }));
         } else {
             console.error("WebSocket is not open or undefined.");
-            setError("WebSocket is not open or undefined. Please restart chat")
+            setError("Please restart chat")
         }
     };
 
     const handleChangeChat = (e) => {
         setFormData((data) => ({
             ...data,
-            text: e.target.value || undefined,
+            text: e.target.value || "",
         }));
     };
 

@@ -3,8 +3,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { UserProvider } from "../../testUtilities";
 import { render, act } from '@testing-library/react';
 import ChatDrawer from '../ChatDrawer';
-import Chat from '../Chat';
 import BookClubApi from '../../api';
+import * as usePreviousMessages from '../../hooks/usePreviousMessages';
 
 const mockMessages = [
     {
@@ -18,6 +18,7 @@ const mockMessages = [
         date: new Date().toISOString(),
     }
 ]
+
 jest.mock("../../api", () => ({
     __esModule: true,
     default: {
@@ -25,37 +26,45 @@ jest.mock("../../api", () => ({
     },
 }));
   
+
+beforeEach(() => {
+  jest.spyOn(usePreviousMessages, 'default').mockImplementation(() => ({
+    messages: mockMessages,
+    error: null,
+  }));
+});
+
 afterEach(() => {
     jest.clearAllMocks();
 });
 
 test('renders without crashing', async () => {
-    BookClubApi.getRoomPreviousMessages.mockImplementationOnce(() => (mockMessages));
-  
-    await act(async () => {
-      render(
-        <MemoryRouter>
-          <UserProvider>
-            <ChatDrawer />
-          </UserProvider>
-        </MemoryRouter>
-      );
-    });
-  
+  BookClubApi.getRoomPreviousMessages.mockImplementationOnce(() => (mockMessages));
+
+  await act(async () => {
+    render(
+      <MemoryRouter>
+        <UserProvider>
+          <ChatDrawer />
+        </UserProvider>
+      </MemoryRouter>
+    );
   });
-  
-  test('it renders and matches with snapshot', async () => {
-    BookClubApi.getRoomPreviousMessages.mockImplementationOnce(() => (mockMessages));
-  
-    await act(async () => {
-      ({ asFragment } = render(
-        <MemoryRouter>
-          <UserProvider>
-            <ChatDrawer />
-          </UserProvider>
-        </MemoryRouter>
-      ));
-    });
-  
-    expect(asFragment()).toMatchSnapshot();
+
+});
+
+test('it renders and matches with snapshot', async () => {
+  BookClubApi.getRoomPreviousMessages.mockImplementationOnce(() => (mockMessages));
+
+  await act(async () => {
+    ({ asFragment } = render(
+      <MemoryRouter>
+        <UserProvider>
+          <ChatDrawer />
+        </UserProvider>
+      </MemoryRouter>
+    ));
   });
+
+  expect(asFragment()).toMatchSnapshot();
+});
